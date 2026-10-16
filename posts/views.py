@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def vista_inicio(request):
+    return render(request, 'posts/inicio.html')
+
+def vista_acerca(request):
+    return render(request, 'posts/acerca.html')
