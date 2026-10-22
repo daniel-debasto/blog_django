@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.urls import path, include  # <-- Agregamos 'include' aquí
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('posts.urls')),  # <-- Redirige la raíz a las URLs de tu app 'posts'
+    path('', include('posts.urls')),  # Redirige la raíz a las URLs de la app posts
 ]
