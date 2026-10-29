@@ -1,0 +1,25 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+<h2>{{ post.titulo }}</h2>
+<p><strong>Autor:</strong> {{ post.autor }} | <strong>Estado:</strong> {{ post.estado }}</p>
+
+{% if post.imagen %}
+    <div class="post-imagen" style="margin: 20px 0;">
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="max-width: 500px; height: auto; border-radius: 8px;">
+    </div>
+{% else %}
+    <p><em>📷 Esta publicación no contiene imagen.</em></p>
+{% endif %}
+
+<div class="post-contenido" style="margin-top: 20px;">
+    <p>{{ post.contenido|linebreaks }}</p>
+</div>
+
+<hr>
+<p>
+    <a href="{% url 'lista_posts' %}">🔙 Volver al listado</a> | 
+    <a href="{% url 'editar_post' post.pk %}">✏️ Editar</a> | 
+    <a href="{% url 'eliminar_post' post.pk %}" style="color: red;">❌ Eliminar</a>
+</p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+<h2>{{ accion }} Publicación</h2>
+
+<form method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" style="padding: 8px 15px; cursor: pointer;">Guardar Cambios</button>
+    <a href="{% url 'lista_posts' %}" style="margin-left: 15px;">Cancelar</a>
+</form>
+{% endblock %}

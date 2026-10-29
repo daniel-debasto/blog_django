@@ -1,24 +1,18 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-<div class="contenedor-blog">
-    <h1>Publicaciones del Blog</h1>
-
+<h2>Listado de Publicaciones</h2>
+<p><a href="{% url 'crear_post' %}">➕ Crear Nueva Publicación</a></p>
+<ul>
     {% for post in posts %}
-        <article class="post-card">
-            <!-- Título dinámico -->
-            <h2>{{ post.titulo }}</h2>
-            
-            <!-- Datos adicionales opcionales para complementar -->
-            <p class="meta">Por: {{ post.autor }} | {{ post.fecha_creacion|date:"d/m/Y" }}</p>
-            
-            <!-- Contenido dinámico -->
-            <div class="contenido">
-                {{ post.contenido }}
-            </div>
-        </article>
+        <li>
+            <a href="{% url 'detalle_post' post.pk %}"><strong>{{ post.titulo }}</strong></a> 
+            - por {{ post.autor }}
+            (<a href="{% url 'editar_post' post.pk %}">Editar</a> | 
+             <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>)
+        </li>
     {% empty %}
-        <p>No hay posts publicados actualmente.</p>
+        <li>No hay publicaciones disponibles en este momento.</li>
     {% endfor %}
-</div>
+</ul>
 {% endblock %}

@@ -22,6 +22,8 @@ class Post(models.Model):
         default='borrador',
         verbose_name="Estado"
     )
+    imagen = models.ImageField(upload_to='posts/', null=True, blank=True)
+
 
     class Meta:
         verbose_name = "Publicación"
