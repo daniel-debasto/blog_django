@@ -1,0 +1,19 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Perfil de {{ user.username }}</h2>
+    {% if user.perfil.avatar %}
+        <img src="{{ user.perfil.avatar.url }}" alt="Avatar" style="max-width: 150px; border-radius: 50%;">
+    {% endif %}
+    <p><strong>Biografía:</strong> {{ user.perfil.biografia|default:"Sin biografía aún." }}</p>
+    <p><strong>Sitio Web:</strong> 
+        {% if user.perfil.link_web %}
+            <a href="{{ user.perfil.link_web }}" target="_blank">{{ user.perfil.link_web }}</a>
+        {% else %}
+            No especificado
+        {% endif %}
+    </p>
+    <a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
+</div>
+{% endblock %}

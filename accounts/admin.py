@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Perfil
 
-# Register your models here.
+# Registramos el modelo Perfil de la app accounts
+admin.site.register(Perfil)

@@ -7,13 +7,14 @@ Este repositorio contiene la estructura inicial de un proyecto Django para const
 ## Instalación
 Clonar el repositorio:
 ```bash
-git clone URL_DEL_REPOSITORIO
+git clone https://github.com
 ```
 
 Entrar a la carpeta del proyecto:
 ```bash
-cd NOMBRE_DEL_REPOSITORIO
+cd mi_proyecto_django
 ```
+
 
 Crear entorno virtual:
 ```bash
