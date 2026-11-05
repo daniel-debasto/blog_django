@@ -1,18 +1,27 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-<h2>Listado de Publicaciones</h2>
-<p><a href="{% url 'crear_post' %}">➕ Crear Nueva Publicación</a></p>
-<ul>
-    {% for post in posts %}
-        <li>
-            <a href="{% url 'detalle_post' post.pk %}"><strong>{{ post.titulo }}</strong></a> 
-            - por {{ post.autor }}
-            (<a href="{% url 'editar_post' post.pk %}">Editar</a> | 
-             <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>)
-        </li>
-    {% empty %}
-        <li>No hay publicaciones disponibles en este momento.</li>
-    {% endfor %}
-</ul>
+    <h2>Listado de Publicaciones</h2>
+    
+    {% if user.is_authenticated %}
+        <!-- Solo lo ve el usuario que inició sesión -->
+        <p><a href="{% url 'crear_post' %}">➕ Crear Nueva Publicación</a></p>
+    {% endif %}
+    
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'detalle_post' post.pk %}"><strong>{{ post.titulo }}</strong></a>
+                - por {{ post.autor }}
+                
+                {% if user.is_authenticated %}
+                    <!-- Las opciones de edición solo se ven si está logueado -->
+                    (<a href="{% url 'editar_post' post.pk %}">Editar</a> |
+                     <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>)
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay publicaciones disponibles en este momento.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Aplicaciones propias
     'posts.apps.PostsConfig',
+    'accounts.apps.AccountsConfig',
 ]
+
 
 
 MIDDLEWARE = [
@@ -133,4 +135,9 @@ import os
 # Configuración para archivos multimedia subidos por usuarios
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# --- AGREGÁ ESTAS DOS LÍNEAS AL FINAL ---
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'lista_posts'  # Redirige al listado de posts tras iniciar sesión
+
 

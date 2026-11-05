@@ -1,5 +1,5 @@
-# CORRECCIÓN EN LA LÍNEA 1:
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
 
@@ -14,9 +14,10 @@ def detalle_post(request, pk):
     return render(request, 'posts/detalle_post.html', {'post': post})
 
 # 3. CREATE - Crear un nuevo post con imagen
+@login_required
 def crear_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES) # ¡Crucial para las imágenes!
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('lista_posts')
@@ -25,11 +26,12 @@ def crear_post(request):
     return render(request, 'posts/post_form.html', {'form': form, 'accion': 'Crear'})
 
 # 4. UPDATE - Editar un post existente y cambiar imagen
+@login_required
 def editar_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
-        if form.is_valid():
+        if form.is_valid(): 
             form.save()
             return redirect('detalle_post', pk=post.pk)
     else:
@@ -37,6 +39,7 @@ def editar_post(request, pk):
     return render(request, 'posts/post_form.html', {'form': form, 'accion': 'Editar'})
 
 # 5. DELETE - Eliminar un post mediante confirmación previa
+@login_required
 def eliminar_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':

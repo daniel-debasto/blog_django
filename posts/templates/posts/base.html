@@ -9,14 +9,31 @@
 </head>
 <body>
 
-    <header>
+      <header>
         <nav>
             <ul>
                 <li><a href="{% url 'lista_posts' %}">Inicio</a></li>
                 <li><a href="{% url 'acerca' %}">Acerca de</a></li>
+                
+                {% if user.is_authenticated %}
+                    <!-- Opciones para usuarios que iniciaron sesión -->
+                    <li><a href="{% url 'crear_post' %}">Crear Post</a></li>
+                    <li><span style="color: white; margin-left: 10px;">Hola, <strong>{{ user.username }}</strong>!</span></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 10px;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:none; border:none; color:lightblue; cursor:pointer; text-decoration:underline; font-size:16px;">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- Opciones para visitantes anónimos -->
+                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                    <li><a href="{% url 'registro' %}">Registrarse</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
+
 
     <main class="container">
         {% block content %}
