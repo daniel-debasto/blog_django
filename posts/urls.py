@@ -5,7 +5,7 @@ urlpatterns = [
     # Rutas anteriores de tu proyecto (para que funcione el menú de base.html)
     path('', views.lista_posts, name='inicio'),
     path('lista/', views.lista_posts, name='lista_posts'),
-    path('acerca/', views.lista_posts, name='acerca'), # Apunta temporalmente aquí para que no rompa
+        path('acerca/', views.acerca, name='acerca'), # Apunta temporalmente aquí para que no rompa
     
     # Rutas del CRUD
     path('post/<int:pk>/', views.detalle_post, name='detalle_post'),

@@ -1,27 +1,62 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <h2>Listado de Publicaciones</h2>
-    
-    {% if user.is_authenticated %}
-        <!-- Solo lo ve el usuario que inició sesión -->
-        <p><a href="{% url 'crear_post' %}">➕ Crear Nueva Publicación</a></p>
-    {% endif %}
-    
-    <ul>
-        {% for post in posts %}
-            <li>
-                <a href="{% url 'detalle_post' post.pk %}"><strong>{{ post.titulo }}</strong></a>
-                - por {{ post.autor }}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Listado de Publicaciones</h2>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'crear_post' %}" class="btn btn-success" style="margin-top: 0;">+ Crear Nueva Publicación</a>
+        {% endif %}
+    </div>
+
+    {% for post in posts %}
+        <div class="post-card">
+            <a href="{% url 'detalle_post' post.pk %}" class="post-title">
+                {{ post.titulo }}
+            </a>
+            
+            <div class="post-meta">
+                Publicado por <strong>{{ post.autor }}</strong>
+            </div>
+            
+            <p class="post-excerpt">
+                {{ post.contenido|truncatewords:25 }}
+            </p>
+            
+            <div style="margin-top: 10px;">
+                <a href="{% url 'detalle_post' post.pk %}" class="btn btn-secondary btn-sm" style="margin-left: 0;">Leer más</a>
                 
                 {% if user.is_authenticated %}
-                    <!-- Las opciones de edición solo se ven si está logueado -->
-                    (<a href="{% url 'editar_post' post.pk %}">Editar</a> |
-                     <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>)
+                    <a href="{% url 'editar_post' post.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_post' post.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
                 {% endif %}
-            </li>
-        {% empty %}
-            <li>No hay publicaciones disponibles en este momento.</li>
-        {% endfor %}
-    </ul>
+            </div>
+        </div>
+    {% empty %}
+        <div class="post-card">
+            <p style="margin: 0; color: #6c757d;">No hay publicaciones disponibles en este momento.</p>
+        </div>
+    {% endfor %}
+        <!-- Barra de paginación: 1, 2, 3 ... 8 -->
+    {% if posts.has_other_pages %}
+        <div class="pagination">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}" class="page-link">&laquo; Anterior</a>
+            {% endif %}
+
+            {% for num in rango_paginas %}
+                {% if num == posts.paginator.ELLIPSIS %}
+                    <span class="page-dots">...</span>
+                {% elif num == posts.number %}
+                    <span class="page-link active">{{ num }}</span>
+                {% else %}
+                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}" class="page-link">Siguiente &raquo;</a>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endblock %}

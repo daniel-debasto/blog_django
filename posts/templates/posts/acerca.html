@@ -1,10 +1,28 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <h1>Acerca de este proyecto</h1>
-    <h2>Sobre el Autor</h2>
-    <p>Hola, soy Daniel Debasto, un apasionado del desarrollo de software y estudiante de Python.</p>
-    
-    <h2>Propósito del Sitio</h2>
-    <p>Este sitio web forma parte de una serie de entregas prácticas. El objetivo actual es dominar el flujo de Django conectando Rutas, Vistas, Templates y Archivos Estáticos.</p>
+    <div style="margin-bottom: 20px;">
+        <h2 style="color: #198754; margin-bottom: 15px;">Acerca de este Blog</h2>
+    </div>
+
+    <div class="post-card">
+        <h3 style="color: #2c3e50; margin-top: 0;">¿De qué se trata este proyecto?</h3>
+        <p style="color: #444444; line-height: 1.6;">
+            Este blog es una plataforma web desarrollada desde cero con <strong>Python y Django</strong>, diseñada para compartir noticias, análisis de actualidad, economía y deportes.
+        </p>
+        <p style="color: #444444; line-height: 1.6;">
+            El objetivo principal es ofrecer un espacio limpio y dinámico donde los usuarios registrados pueden crear, editar y administrar sus propias publicaciones de manera sencilla, mientras que los visitantes pueden explorar todo el contenido publicado.
+        </p>
+    </div>
+
+    <div class="post-card">
+        <h3 style="color: #2c3e50; margin-top: 0;">Sobre el Autor</h3>
+        <p style="color: #444444; line-height: 1.6; margin-bottom: 0;">
+            Proyecto desarrollado por <strong>ddebasto</strong> como parte de mi formación en desarrollo web backend. Construido utilizando arquitectura MVT (Modelo-Vista-Template), sistema de autenticación de usuarios, manejo de imágenes y paginación dinámica.
+        </p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'lista_posts' %}" class="btn btn-secondary" style="margin-left: 0;">&laquo; Volver al Inicio</a>
+    </div>
 {% endblock %}

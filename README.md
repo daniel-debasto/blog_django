@@ -1,22 +1,23 @@
 # Blog Django - Proyecto Final Python
 
-Este es el proyecto consolidado para la entrega final del módulo de Python y Django. Consiste en un blog web completamente funcional que integra la gestión de publicaciones, carga de imágenes, autenticación de usuarios y perfiles personalizados.
+Este es el proyecto consolidado para la entrega final del módulo de Python y Django. Consiste en un blog web completamente funcional que integra la gestión de publicaciones con paginación, carga de imágenes, autenticación de usuarios, perfiles personalizados y sección informativa.
 
 ## 🚀 Funcionalidades Principales
 
-### 📝 Gestión de Posts (CRUD Completo)
-* **Listar:** Visualización de todas las publicaciones en la página principal.
-* **Detalle:** Vista individual para cada post con su correspondiente imagen adjunta.
-* **Crear:** Formulario dinámico con soporte de carga multimedia para usuarios autenticados.
+### 📝 Gestión de Posts (CRUD Completo) y Navegación
+* **Listar y Paginación:** Visualización de las publicaciones en tarjetas limpias con extracto de texto y paginación dinámica (`Paginator`) en la página principal.
+* **Detalle:** Vista individual para cada post con su contenido completo e imagen adjunta.
+* **Crear:** Formulario dinámico con soporte de carga multimedia y asignación automática del autor según el usuario conectado.
 * **Editar:** Modificación de textos y reemplazo o carga de imágenes.
-* **Eliminar:** Remoción lógica y física mediante pantalla de confirmación interactiva.
+* **Eliminar:** Remoción de publicaciones mediante pantalla de confirmación interactiva.
+* **Sección Acerca de:** Página dedicada con información sobre el propósito del blog y su desarrollo.
 
 ### 🔐 Sistema de Autenticación y Perfiles
 * **Autenticación Completa:** Inicio y cierre de sesión de usuarios mediante el sistema nativo de Django.
 * **Registro Personalizado:** Formulario de alta para nuevos usuarios con validación obligatoria de correo electrónico.
 * **Extensión del Modelo (Perfil):** Modelo `Perfil` vinculado a `User` que incluye biografía, avatar (imagen) y enlace web.
 * **Creación Automática:** Generación automática del perfil en la base de datos inmediatamente después de registrarse un usuario.
-* **Protección de Rutas:** Restricción de acceso mediante decoradores para asegurar que los visitantes anónimos no puedan crear, editar ni borrar publicaciones.
+* **Protección de Rutas:** Restricción de acceso mediante decoradores (`@login_required`) y validación en plantillas para asegurar que los visitantes anónimos no puedan crear, editar ni borrar publicaciones.
 
 ---
 
@@ -26,7 +27,7 @@ Este es el proyecto consolidado para la entrega final del módulo de Python y Dj
 * **Django 6**
 * **Pillow** (Procesamiento y validación de imágenes)
 * **SQLite** (Base de datos local)
-* **Bootstrap** / CSS (Estilos e interfaz web)
+* **HTML5 / CSS3** (Estilos personalizados e interfaz web responsiva)
 
 ---
 
@@ -37,7 +38,7 @@ Seguí estos pasos para clonar el repositorio, reconstruir el entorno y ejecutar
 ### 1. Clonar el repositorio
 ```bash
 git clone https://github.com/daniel-debasto/blog_django.git
-cd mi_proyecto_django
+cd blog_django
 ```
 
 ### 2. Crear y activar el entorno virtual
@@ -77,7 +78,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Una vez iniciado, abrí tu navegador e ingresá a: [http://127.0.0](http://127.0.0)
+Una vez iniciado, abrí tu navegador e ingresá a: `http://127.0.0`
 
 ---
 
